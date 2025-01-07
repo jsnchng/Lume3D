@@ -1,7 +1,7 @@
 {
-    "compatibility_info": { "version" : "22.00", "type" : "shader" },
-    "vert": "3dshaders://shader/core3d_dm_fw.vert.spv",
-    "frag": "3dshaders://shader/DEBUG_QUAD.frag.spv",
+    "compatibility_info" : { "version" : "22.00", "type" : "shader" },
+    "vert": "rendershaders://shader/fullscreen_triangle_mv.vert.spv",
+    "frag": "3dshaders://shader/core3d_dm_camera_cubemap_blender.frag.spv",
     "state": {
         "rasterizationState": {
             "enableDepthClamp": false,
@@ -12,8 +12,8 @@
             "frontFace": "counter_clockwise"
         },
         "depthStencilState": {
-            "enableDepthTest": true,
-            "enableDepthWrite": true,
+            "enableDepthTest": false,
+            "enableDepthWrite": false,
             "enableDepthBoundsTest": false,
             "enableStencilTest": false,
             "depthCompareOp": "less_or_equal"

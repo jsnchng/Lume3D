@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef SHADERS__COMMON__3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
-#define SHADERS__COMMON__3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
+#ifndef SHADERS_COMMON_3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
+#define SHADERS_COMMON_3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
 
 #include "3d/shaders/common/3d_dm_structures_common.h"
 #include "render/shaders/common/render_compatibility_common.h"
@@ -43,6 +43,19 @@ layout(set = 1, binding = 1, std140) uniform uObjectSkinStructData
     DefaultMaterialSkinStruct uSkinData;
 };
 
+#if (CORE3D_DM_DEPTH_FRAG_LAYOUT == 1)
+layout(set = 1, binding = 2, std140) uniform uMaterialStructData
+{
+    DefaultMaterialMaterialStruct uMaterialData;
+};
+layout(set = 1, binding = 3, std140) uniform uMaterialTransformStructData
+{
+    DefaultMaterialTransformMaterialStruct uMaterialTransformData;
+};
+
+layout(set = 2, binding = 0) uniform CORE_RELAXEDP sampler2D uSampTextureBase;
+#endif
+
 layout(constant_id = 0) const uint CORE_SUBMESH_FLAGS = 0;
 layout(constant_id = 1) const uint CORE_MATERIAL_FLAGS = 0;
 
@@ -50,4 +63,4 @@ layout(constant_id = 1) const uint CORE_MATERIAL_FLAGS = 0;
 
 #endif
 
-#endif // SHADERS__COMMON__3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
+#endif // SHADERS_COMMON_3D_DEFAULT_DEPTH_VERT_LAYOUT_COMMON_H
