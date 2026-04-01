@@ -1,0 +1,9 @@
+[submodule "LumeBase"]
+	path = LumeBase
+	url = https://github.com/jsnchng/LumeBase.git
+[submodule "LumeEngine"]
+	path = LumeEngine
+	url = https://github.com/jsnchng/LumeEngine.git
+[submodule "LumeRender"]
+	path = LumeRender
+	url = https://github.com/jsnchng/LumeRender.git
