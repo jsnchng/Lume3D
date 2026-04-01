@@ -525,6 +525,8 @@ PluginToken CreatePlugin3D(IRenderContext& context)
 #if (CORE3D_EMBEDDED_ASSETS_ENABLED == 1)
     // Create rofs3D:// protocol that points to embedded asset files.
     fileManager.RegisterFilesystem("rofs3D", fileManager.CreateROFilesystem(BINARY_DATA_FOR_3D, SIZE_OF_DATA_FOR_3D));
+#else
+    fileManager.RegisterPath("rofs3D", "assets://3d/", false);
 #endif
     for (uint32_t idx = 0; idx < countof(RENDER_DATA_PATHS); ++idx) {
         fileManager.RegisterPath(RENDER_DATA_PATHS[idx].protocol, RENDER_DATA_PATHS[idx].uri, false);
@@ -581,6 +583,8 @@ void DestroyPlugin3D(PluginToken token)
     state->renderContext.GetDevice().GetShaderManager().UnloadShaderFiles(SHADER_FILE_PATHS);
 #if (CORE3D_EMBEDDED_ASSETS_ENABLED == 1)
     fileManager.UnregisterFilesystem("rofs3D");
+#else
+    fileManager.UnregisterPath("rofs3D", "assets://3d/");
 #endif
     for (uint32_t idx = 0; idx < countof(RENDER_DATA_PATHS); ++idx) {
         fileManager.UnregisterPath(RENDER_DATA_PATHS[idx].protocol, RENDER_DATA_PATHS[idx].uri);
