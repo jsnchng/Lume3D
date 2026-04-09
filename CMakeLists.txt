@@ -6,17 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 #
-# Download LumeShaderCompiler.exe
-#
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/LumeShaderCompiler.exe")
-  file(DOWNLOAD
-    "https://github.com/jsnchng/LumeShaderCompiler/releases/download/v1.0.0-alpha/LumeShaderCompiler.exe"
-    "${CMAKE_BINARY_DIR}/LumeShaderCompiler.exe"
-    EXPECTED_HASH SHA256=40c5382909b8e8033fd8eaa326963f84448865190f7000c4e8b91e6fd30be587
-    SHOW_PROGRESS)
-endif()
-
-#
 # Target: AGPBaseAPI
 #
 if(NOT TARGET AGPBase::AGPBaseAPI)
@@ -41,6 +30,22 @@ if(NOT TARGET AGPRender::AGPRenderAPI)
   set(RENDER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/LumeRender")
 else()
   get_filename_component(RENDER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../LumeRender" ABSOLUTE)
+endif()
+
+#
+# Extract LumeShaderCompiler.exe from LumeRender
+#
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/LumeShaderCompiler.exe")
+  if(NOT EXISTS "${RENDER_DIR}/tools/LumeShaderCompiler.zip")
+    message(FATAL_ERROR "Please run:\n"
+      "git submodule update --init\n"
+      "and then re-run cmake.")
+  else()
+    # Cmake 3.20+
+    file(ARCHIVE_EXTRACT
+      INPUT "${RENDER_DIR}/tools/LumeShaderCompiler.zip"
+      DESTINATION "${CMAKE_BINARY_DIR}")
+  endif()
 endif()
 
 #
